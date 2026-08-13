@@ -24,7 +24,7 @@ public class InputValidator {
     public static int getValidatedMenuChoice(Scanner scanner, int min, int max) {
         while (true) {
             com.bptn.individual_project.util.MessageLogger.print("Enter choice (" + min + "-" + max + "): ");
-            String input = scanner.nextLine().trim();
+            String input = com.bptn.individual_project.web.WebSessionContext.getNextLine().trim();
 
             try {
                 int choice = Integer.parseInt(input);
@@ -50,7 +50,7 @@ public class InputValidator {
     public static String getValidatedName(Scanner scanner) {
         while (true) {
             com.bptn.individual_project.util.MessageLogger.print("Enter your character's name: ");
-            String input = scanner.nextLine().trim();
+            String input = com.bptn.individual_project.web.WebSessionContext.getNextLine().trim();
 
             if (input.length() < 2 || input.length() > 20) {
                 com.bptn.individual_project.util.MessageLogger.println("  Name must be between 2 and 20 characters.");
@@ -78,7 +78,7 @@ public class InputValidator {
     public static boolean getYesNo(Scanner scanner, String prompt) {
         while (true) {
             com.bptn.individual_project.util.MessageLogger.print(prompt + " (Y/N): ");
-            String input = scanner.nextLine().trim().toLowerCase();
+            String input = com.bptn.individual_project.web.WebSessionContext.getNextLine().trim().toLowerCase();
 
             if (input.equals("y") || input.equals("yes")) {
                 return true;
@@ -102,7 +102,7 @@ public class InputValidator {
     public static char getValidatedDirection(Scanner scanner) {
         while (true) {
             com.bptn.individual_project.util.MessageLogger.print("Choose a direction to explore (N / E / S / W): ");
-            String input = scanner.nextLine().trim().toUpperCase();
+            String input = com.bptn.individual_project.web.WebSessionContext.getNextLine().trim().toUpperCase();
 
             if (input.length() == 1 && "NESW".contains(input)) {
                 return input.charAt(0);

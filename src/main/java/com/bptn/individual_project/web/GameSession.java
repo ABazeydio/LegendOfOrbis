@@ -5,23 +5,26 @@ import com.bptn.individual_project.util.MessageLogger;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class GameSession {
     private final String id;
-    private final WebInputStream webInputStream;
+    private final BlockingQueue<String> inputs = new LinkedBlockingQueue<>();
+    private final BlockingQueue<List<String>> outputs = new LinkedBlockingQueue<>();
     private final Thread engineThread;
 
     public GameSession(String id) {
         this.id = id;
-        this.webInputStream = new WebInputStream();
         
         this.engineThread = new Thread(() -> {
-            Scanner scanner = new Scanner(webInputStream);
-            new GameEngine(scanner).start();
+            WebSessionContext.initialize(inputs, outputs);
+            // We pass null for Scanner since we no longer use it in InputValidator
+            new GameEngine(null).start();
             // If the engine loop ever fully exits, flush final logs just in case.
             try {
-                // Submit one final output so the waiting REST call isn't hung forever
-                webInputStream.submitInput(""); // mock input
+                List<String> finalLogs = MessageLogger.getLogsAndClear();
+                outputs.add(finalLogs);
             } catch (Exception e) {}
         });
         this.engineThread.start();
@@ -32,10 +35,10 @@ public class GameSession {
     }
 
     public List<String> waitForOutput() throws InterruptedException {
-        return webInputStream.waitForOutput();
+        return outputs.take();
     }
 
     public void submitInput(String input) {
-        webInputStream.submitInput(input);
+        inputs.add(input);
     }
 }
