@@ -1,0 +1,22 @@
+# Maven
+target/
+
+# Eclipse
+.project
+.classpath
+.settings/
+.metadata/
+bin/
+
+
+# VS Code
+.vscode/
+
+# Java
+*.class
+*.log
+hs_err_pid*
+
+# OS files
+.DS_Store
+Thumbs.db
