@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legends of Orbis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="background-effect"></div>
+    <div class="container">
+        <header>
+            <h1>Legends of Orbis</h1>
+            <p>An epic journey awaits.</p>
+        </header>
+        
+        <main class="glass-panel">
+            <div id="game-output" class="output-area">
+                <div class="spinner" id="loading-spinner"></div>
+                <p>Initializing game session...</p>
+            </div>
+            
+            <form id="input-form" class="input-area">
+                <input type="text" id="user-input" placeholder="Enter your command..." autocomplete="off" disabled>
+                <button type="submit" id="submit-btn" disabled>Send</button>
+            </form>
+        </main>
+        
+        <div class="controls">
+            <button id="restart-btn" class="secondary-btn">Restart Game</button>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
