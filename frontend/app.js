@@ -1,4 +1,4 @@
-const BACKEND_URL = 'http://localhost:8080'; // Change this to your Render URL (e.g., https://my-game.onrender.com)
+const BACKEND_URL = 'https://legendoforbis.onrender.com'; // Change this to your Render URL (e.g., https://my-game.onrender.com)
 
 let sessionId = null;
 
@@ -11,7 +11,7 @@ const spinner = document.getElementById('loading-spinner');
 
 function appendOutput(lines) {
     if (!lines) return;
-    
+
     // Remove the initial spinner if it exists
     if (spinner.parentNode === outputArea) {
         outputArea.innerHTML = '';
@@ -26,11 +26,11 @@ function appendOutput(lines) {
             .replace(/---+/g, '<span style="color: var(--accent-hover);">$&</span>')
             .replace(/\*\*\* GAME OVER \*\*\*/, '<span style="color: #ef4444; font-weight: bold;">$&</span>')
             .replace(/Victory!/, '<span style="color: #22c55e; font-weight: bold;">$&</span>');
-            
+
         p.innerHTML = formattedLine || '&nbsp;';
         outputArea.appendChild(p);
     });
-    
+
     // Scroll to bottom
     outputArea.scrollTop = outputArea.scrollHeight;
 }
@@ -51,7 +51,7 @@ function setLoading(isLoading) {
 async function startGame() {
     setLoading(true);
     outputArea.innerHTML = '';
-    
+
     try {
         const response = await fetch(`${BACKEND_URL}/api/start`, {
             method: 'POST',
@@ -71,14 +71,14 @@ async function startGame() {
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (!sessionId) return;
-    
+
     const input = inputField.value.trim();
     if (!input) return;
-    
+
     inputField.value = '';
     appendOutput([`> ${input}`]); // echo user input
     setLoading(true);
-    
+
     try {
         const response = await fetch(`${BACKEND_URL}/api/action`, {
             method: 'POST',
