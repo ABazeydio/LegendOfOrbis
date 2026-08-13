@@ -33,7 +33,7 @@ public class Equipment extends Item {
 	    } else if (slot == EquipmentSlot.ARMOR) {
 	        target.applyEquipmentBonus(0, statBonus);
 	    }
-	    System.out.println(target.getName() + " equips " + getName() + "!");
+	    com.bptn.individual_project.util.MessageLogger.println(target.getName() + " equips " + getName() + "!");
 	}
 
 	/*

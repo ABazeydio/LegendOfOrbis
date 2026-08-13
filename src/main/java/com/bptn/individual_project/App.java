@@ -1,18 +1,27 @@
 package com.bptn.individual_project;
 
-import java.util.Scanner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.bptn.individual_project.engine.GameEngine;
-
-/*
- * Application entry point for Legends of Orbis.
- * Creates a shared Scanner and hands control to GameEngine.
- */
+@SpringBootApplication
 public class App {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        // GameEngine owns the play session; App stays a thin launcher
-        new GameEngine(scanner).start();
-        scanner.close();
+        SpringApplication.run(App.class, args);
+    }
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                // Allow all origins for GitHub Pages compatibility
+                registry.addMapping("/**")
+                        .allowedOrigins("*")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
+            }
+        };
     }
 }

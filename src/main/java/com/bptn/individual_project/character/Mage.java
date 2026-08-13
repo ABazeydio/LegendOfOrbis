@@ -26,20 +26,20 @@ public class Mage extends GameCharacter {
 	@Override
 	public void attack(GameCharacter target) {
 	    String verb = ATTACK_MESSAGES.get(random.nextInt(ATTACK_MESSAGES.size()));
-	    System.out.println(getName() + " " + verb + " " + target.getName() + " for " + getAttackPower() + " damage!");
+	    com.bptn.individual_project.util.MessageLogger.println(getName() + " " + verb + " " + target.getName() + " for " + getAttackPower() + " damage!");
 	    target.takeDamage(getAttackPower());
 	}
 
 	@Override
 	public void specialAttack(GameCharacter target) {
-		System.out.println(getName() + " summons a volcano engulfed with flames at " + target.getName() + " for " + (getAttackPower() * 2) + " damage!");
+		com.bptn.individual_project.util.MessageLogger.println(getName() + " summons a volcano engulfed with flames at " + target.getName() + " for " + (getAttackPower() * 2) + " damage!");
 		target.takeDamage(getAttackPower() * 2);
 	}
 	
 	@Override
 	public void displayStats() {
 	    super.displayStats();
-	    System.out.println("Class: Mage");
+	    com.bptn.individual_project.util.MessageLogger.println("Class: Mage");
 	}
 	
 }

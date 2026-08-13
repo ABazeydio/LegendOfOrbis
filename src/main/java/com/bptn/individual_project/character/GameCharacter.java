@@ -91,7 +91,7 @@ public abstract class GameCharacter implements Combatant {
 		this.maxHealth += 10; // Increase max health on level up
 		this.health = this.maxHealth; // Restore health to max on level up
 		this.attackPower += 10; // Increase attack power on level up 
-		System.out.println("You leveled up! + 1");	
+		com.bptn.individual_project.util.MessageLogger.println("You leveled up! + 1");	
 	}
 	
 	//An XP method that (eventually) triggers level-up logic
@@ -155,11 +155,11 @@ public abstract class GameCharacter implements Combatant {
 	
 	
 	public void displayStats() {
-	    System.out.println("Name: " + name + " | Level: " + level);
-	    System.out.println("Race: " + race );
-	    System.out.println("Health: " + health + "/" + maxHealth);
-	    System.out.println("Attack Power: " + attackPower);
-	    System.out.println("Gold: " + gold + " | XP: " + experience + "/" + maxExperience);
+	    com.bptn.individual_project.util.MessageLogger.println("Name: " + name + " | Level: " + level);
+	    com.bptn.individual_project.util.MessageLogger.println("Race: " + race );
+	    com.bptn.individual_project.util.MessageLogger.println("Health: " + health + "/" + maxHealth);
+	    com.bptn.individual_project.util.MessageLogger.println("Attack Power: " + attackPower);
+	    com.bptn.individual_project.util.MessageLogger.println("Gold: " + gold + " | XP: " + experience + "/" + maxExperience);
 	}
 
 }

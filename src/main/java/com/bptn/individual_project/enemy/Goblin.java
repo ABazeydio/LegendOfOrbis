@@ -25,22 +25,22 @@ public class Goblin extends Enemy {
     @Override
     public void attack(GameCharacter target) {
         String line = ATTACK_LINES.get(random.nextInt(ATTACK_LINES.size()));
-        System.out.println(getName() + " " + line + " " + target.getName() + " for " + getAttackPower() + " damage!");
+        com.bptn.individual_project.util.MessageLogger.println(getName() + " " + line + " " + target.getName() + " for " + getAttackPower() + " damage!");
         target.takeDamage(getAttackPower());
     }
 
     @Override
     public void specialAttack(GameCharacter target) {
         int damage = getAttackPower() + 5;
-        System.out.println(getName() + " scurries around and gets a Sneaky Strike on " + target.getName() + " for " + damage + " damage!");
+        com.bptn.individual_project.util.MessageLogger.println(getName() + " scurries around and gets a Sneaky Strike on " + target.getName() + " for " + damage + " damage!");
         target.takeDamage(damage);
     }
 
     @Override
     public void displayStats() {
-        System.out.println("Name: " + getName());
-        System.out.println("Health: " + getHealth() + "/" + getMaxHealth());
-        System.out.println("Attack Power: " + getAttackPower());
+        com.bptn.individual_project.util.MessageLogger.println("Name: " + getName());
+        com.bptn.individual_project.util.MessageLogger.println("Health: " + getHealth() + "/" + getMaxHealth());
+        com.bptn.individual_project.util.MessageLogger.println("Attack Power: " + getAttackPower());
     }
 
 }

@@ -56,9 +56,9 @@ public class GameEngine {
      * or quitting back to a fresh character.
      */
     public void start() {
-        System.out.println("========================================");
-        System.out.println("       LEGENDS OF ORBIS");
-        System.out.println("========================================");
+        com.bptn.individual_project.util.MessageLogger.println("========================================");
+        com.bptn.individual_project.util.MessageLogger.println("       LEGENDS OF ORBIS");
+        com.bptn.individual_project.util.MessageLogger.println("========================================");
 
         boolean playAgain = true;
         while (playAgain) {
@@ -66,8 +66,8 @@ public class GameEngine {
             mainLoop();
 
             if (!player.isAlive()) {
-                System.out.println("\n*** GAME OVER ***");
-                System.out.println(player.getName() + " has fallen in battle...");
+                com.bptn.individual_project.util.MessageLogger.println("\n*** GAME OVER ***");
+                com.bptn.individual_project.util.MessageLogger.println(player.getName() + " has fallen in battle...");
             }
 
             playAgain = InputValidator.getYesNo(scanner, "Play again?");
@@ -79,7 +79,7 @@ public class GameEngine {
             }
         }
 
-        System.out.println("\nThanks for playing Legends of Orbis!");
+        com.bptn.individual_project.util.MessageLogger.println("\nThanks for playing Legends of Orbis!");
     }
 
 
@@ -88,20 +88,20 @@ public class GameEngine {
      * player pick Warrior / Mage / Assassin via a validated menu choice.
      */
     private void createCharacter() {
-        System.out.println("\n--- Character Creation ---");
+        com.bptn.individual_project.util.MessageLogger.println("\n--- Character Creation ---");
 
         String name = InputValidator.getValidatedName(scanner);
 
         // Race is assigned randomly at creation (per Race enum design)
         Race[] races = Race.values();
         Race race = races[random.nextInt(races.length)];
-        System.out.println("The fates assign your lineage: " + race.name());
-        System.out.println("  " + race);
+        com.bptn.individual_project.util.MessageLogger.println("The fates assign your lineage: " + race.name());
+        com.bptn.individual_project.util.MessageLogger.println("  " + race);
 
-        System.out.println("\nChoose your class:");
-        System.out.println("1. Warrior  (sturdy — high HP, solid attack)");
-        System.out.println("2. Mage     (glass cannon — lower HP, higher attack)");
-        System.out.println("3. Assassin (balanced — mid HP and attack)");
+        com.bptn.individual_project.util.MessageLogger.println("\nChoose your class:");
+        com.bptn.individual_project.util.MessageLogger.println("1. Warrior  (sturdy — high HP, solid attack)");
+        com.bptn.individual_project.util.MessageLogger.println("2. Mage     (glass cannon — lower HP, higher attack)");
+        com.bptn.individual_project.util.MessageLogger.println("3. Assassin (balanced — mid HP and attack)");
         int classChoice = InputValidator.getValidatedMenuChoice(scanner, 1, 3);
 
         // Base stats tuned per class before race buffs are applied
@@ -111,7 +111,7 @@ public class GameEngine {
             case 3 -> player = new Assassin(name, 100, 15, race);
         }
 
-        System.out.println("\n" + player.getName() + " steps into Orbis!");
+        com.bptn.individual_project.util.MessageLogger.println("\n" + player.getName() + " steps into Orbis!");
         player.displayStats();
     }
 
@@ -122,12 +122,12 @@ public class GameEngine {
      */
     private void mainLoop() {
         while (player.isAlive() && !quitRequested) {
-            System.out.println("\n========== MAIN MENU ==========");
-            System.out.println("1. Explore");
-            System.out.println("2. Inventory");
-            System.out.println("3. Shop");
-            System.out.println("4. View Stats");
-            System.out.println("5. Quit");
+            com.bptn.individual_project.util.MessageLogger.println("\n========== MAIN MENU ==========");
+            com.bptn.individual_project.util.MessageLogger.println("1. Explore");
+            com.bptn.individual_project.util.MessageLogger.println("2. Inventory");
+            com.bptn.individual_project.util.MessageLogger.println("3. Shop");
+            com.bptn.individual_project.util.MessageLogger.println("4. View Stats");
+            com.bptn.individual_project.util.MessageLogger.println("5. Quit");
             int choice = InputValidator.getValidatedMenuChoice(scanner, 1, 5);
 
             switch (choice) {
@@ -135,7 +135,7 @@ public class GameEngine {
                 case 2 -> inventoryMenu();
                 case 3 -> shopMenu();
                 case 4 -> {
-                    System.out.println();
+                    com.bptn.individual_project.util.MessageLogger.println();
                     player.displayStats();
                 }
                 case 5 -> {
@@ -164,16 +164,16 @@ public class GameEngine {
         };
 
         stepsExplored++;
-        System.out.println("\nYou travel " + directionName + "...");
+        com.bptn.individual_project.util.MessageLogger.println("\nYou travel " + directionName + "...");
 
         if (random.nextDouble() < ENCOUNTER_CHANCE) {
             Enemy enemy = spawnEnemy();
-            System.out.println("A wild " + enemy.getName() + " appears!");
+            com.bptn.individual_project.util.MessageLogger.println("A wild " + enemy.getName() + " appears!");
 
             boolean won = new CombatManager(player, enemy, scanner).startCombat();
             resolveCombat(won, enemy);
         } else {
-            System.out.println("The path is quiet. Nothing attacks you this time.");
+            com.bptn.individual_project.util.MessageLogger.println("The path is quiet. Nothing attacks you this time.");
         }
     }
 
@@ -220,13 +220,13 @@ public class GameEngine {
         int xp = enemy.getXpReward();
         player.addGold(gold);
         player.earnExperience(xp);
-        System.out.println("\nVictory! You gained " + gold + " gold and " + xp + " XP.");
+        com.bptn.individual_project.util.MessageLogger.println("\nVictory! You gained " + gold + " gold and " + xp + " XP.");
 
         // Random equipment drop
         if (random.nextDouble() < LOOT_DROP_CHANCE) {
             Equipment loot = rollLoot();
             inventory.addItem(loot);
-            System.out.println("Loot found: " + loot.getName() + "!");
+            com.bptn.individual_project.util.MessageLogger.println("Loot found: " + loot.getName() + "!");
         }
     }
 
@@ -254,15 +254,15 @@ public class GameEngine {
      * Purchases go into Inventory (equip them from the Inventory menu).
      */
     private void shopMenu() {
-        System.out.println("\n--- Merchant of Orbis ---");
-        System.out.println("Your gold: " + player.getGold());
-        System.out.println("1. Orbis Blade   (+12 Attack)  — " + PRICE_ORBIS_BLADE + " gold");
-        System.out.println("2. Aegis Plate   (+15 Max HP)  — " + PRICE_AEGIS_PLATE + " gold");
-        System.out.println("3. Leave shop");
+        com.bptn.individual_project.util.MessageLogger.println("\n--- Merchant of Orbis ---");
+        com.bptn.individual_project.util.MessageLogger.println("Your gold: " + player.getGold());
+        com.bptn.individual_project.util.MessageLogger.println("1. Orbis Blade   (+12 Attack)  — " + PRICE_ORBIS_BLADE + " gold");
+        com.bptn.individual_project.util.MessageLogger.println("2. Aegis Plate   (+15 Max HP)  — " + PRICE_AEGIS_PLATE + " gold");
+        com.bptn.individual_project.util.MessageLogger.println("3. Leave shop");
         int choice = InputValidator.getValidatedMenuChoice(scanner, 1, 3);
 
         if (choice == 3) {
-            System.out.println("The merchant nods farewell.");
+            com.bptn.individual_project.util.MessageLogger.println("The merchant nods farewell.");
             return;
         }
 
@@ -278,14 +278,14 @@ public class GameEngine {
      */
     private void buyItem(String name, EquipmentSlot slot, int bonus, int price) {
         if (!player.spendGold(price)) {
-            System.out.println("Not enough gold. You need " + price + " (have " + player.getGold() + ").");
-            System.out.println("Come back when you're richer, weakling.");
+            com.bptn.individual_project.util.MessageLogger.println("Not enough gold. You need " + price + " (have " + player.getGold() + ").");
+            com.bptn.individual_project.util.MessageLogger.println("Come back when you're richer, weakling.");
             return;
         }
         inventory.addItem(new Equipment(name, slot, bonus));
-        System.out.println("Purchased " + name + "! (" + price + " gold spent, "
+        com.bptn.individual_project.util.MessageLogger.println("Purchased " + name + "! (" + price + " gold spent, "
                 + player.getGold() + " remaining)");
-        System.out.println("Equip it from the Inventory menu.");
+        com.bptn.individual_project.util.MessageLogger.println("Equip it from the Inventory menu.");
     }
 
     /*
@@ -293,7 +293,7 @@ public class GameEngine {
      * Equipping a second item in the same slot replaces the old one.
      */
     private void inventoryMenu() {
-        System.out.println("\n--- Inventory ---");
+        com.bptn.individual_project.util.MessageLogger.println("\n--- Inventory ---");
         inventory.displayInventory();
 
         if (inventory.isEmpty()) {
@@ -302,18 +302,18 @@ public class GameEngine {
 
         // Items are numbered from 1; size + 1 is Cancel
         int size = inventory.getSize();
-        System.out.println((size + 1) + ". Cancel");
-        System.out.println("Select a bag item to equip, or Cancel:");
+        com.bptn.individual_project.util.MessageLogger.println((size + 1) + ". Cancel");
+        com.bptn.individual_project.util.MessageLogger.println("Select a bag item to equip, or Cancel:");
         int choice = InputValidator.getValidatedMenuChoice(scanner, 1, size + 1);
 
         if (choice == size + 1) {
-            System.out.println("Nothing changed.");
+            com.bptn.individual_project.util.MessageLogger.println("Nothing changed.");
             return;
         }
 
         boolean equipped = inventory.equipItem(player, choice - 1);
         if (!equipped) {
-            System.out.println("Could not equip that item.");
+            com.bptn.individual_project.util.MessageLogger.println("Could not equip that item.");
         }
     }
 }

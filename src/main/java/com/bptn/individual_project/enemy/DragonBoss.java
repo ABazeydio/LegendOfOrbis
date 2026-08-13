@@ -27,23 +27,23 @@ public class DragonBoss extends Enemy {
     @Override
     public void attack(GameCharacter target) {
         String line = ATTACK_LINES.get(random.nextInt(ATTACK_LINES.size()));
-        System.out.println(getName() + " " + line + " " + target.getName() + " for " + getAttackPower() + " damage!");
+        com.bptn.individual_project.util.MessageLogger.println(getName() + " " + line + " " + target.getName() + " for " + getAttackPower() + " damage!");
         target.takeDamage(getAttackPower());
     }
 
     @Override
     public void specialAttack(GameCharacter target) {
         int damage = getAttackPower() + 15;
-        System.out.println(getName() + " unleashes an Armor-Piercing Strike on " + target.getName() + " for " + damage + " damage, ignoring defenses!");
+        com.bptn.individual_project.util.MessageLogger.println(getName() + " unleashes an Armor-Piercing Strike on " + target.getName() + " for " + damage + " damage, ignoring defenses!");
         target.takeDamage(damage);
     }
 
     @Override
     public void displayStats() {
-        System.out.println("Name: " + getName());
-        System.out.println("Health: " + getHealth() + "/" + getMaxHealth());
-        System.out.println("Attack Power: " + getAttackPower());
-        System.out.println("Race: Demonic");
+        com.bptn.individual_project.util.MessageLogger.println("Name: " + getName());
+        com.bptn.individual_project.util.MessageLogger.println("Health: " + getHealth() + "/" + getMaxHealth());
+        com.bptn.individual_project.util.MessageLogger.println("Attack Power: " + getAttackPower());
+        com.bptn.individual_project.util.MessageLogger.println("Race: Demonic");
     }
 
 }

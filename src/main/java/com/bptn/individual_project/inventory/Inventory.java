@@ -48,7 +48,7 @@ public class Inventory {
             currentEquipment.removeBonus(character);
             items.add(currentEquipment);
 
-            System.out.println(currentEquipment.getName()
+            com.bptn.individual_project.util.MessageLogger.println(currentEquipment.getName()
                     + " was unequipped and returned to your bag.");
         }
 
@@ -69,25 +69,25 @@ public class Inventory {
      * Shows currently worn gear (the HashMap) and bag contents (the ArrayList).
      */
     public void displayInventory() {
-        System.out.println("Equipped:");
+        com.bptn.individual_project.util.MessageLogger.println("Equipped:");
         if (equipped.isEmpty()) {
-            System.out.println("  (nothing)");
+            com.bptn.individual_project.util.MessageLogger.println("  (nothing)");
         } else {
             for (EquipmentSlot slot : EquipmentSlot.values()) {
                 Item item = equipped.get(slot);
                 if (item != null) {
-                    System.out.println("  " + slot + ": " + item.getName());
+                    com.bptn.individual_project.util.MessageLogger.println("  " + slot + ": " + item.getName());
                 }
             }
         }
 
-        System.out.println("Bag:");
+        com.bptn.individual_project.util.MessageLogger.println("Bag:");
         if (items.isEmpty()) {
-            System.out.println("  (empty)");
+            com.bptn.individual_project.util.MessageLogger.println("  (empty)");
             return;
         }
         for (int i = 0; i < items.size(); i++) {
-            System.out.println("  " + (i + 1) + ". " + items.get(i).getName());
+            com.bptn.individual_project.util.MessageLogger.println("  " + (i + 1) + ". " + items.get(i).getName());
         }
     }
 

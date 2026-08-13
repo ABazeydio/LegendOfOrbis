@@ -28,20 +28,20 @@ public class Warrior extends GameCharacter {
 	@Override
 	public void attack(GameCharacter target) {
 	    String verb = ATTACK_MESSAGES.get(random.nextInt(ATTACK_MESSAGES.size()));
-	    System.out.println(getName() + " " + verb + " " + target.getName() + " for " + getAttackPower() + " damage!");
+	    com.bptn.individual_project.util.MessageLogger.println(getName() + " " + verb + " " + target.getName() + " for " + getAttackPower() + " damage!");
 	    target.takeDamage(getAttackPower());
 	}
 
 	@Override
 	public void specialAttack(GameCharacter target) {
-		System.out.println(getName() + " performs a POWERFUL whirlwind attack on " + target.getName() + " for " + (getAttackPower() * 2) + " damage!");
+		com.bptn.individual_project.util.MessageLogger.println(getName() + " performs a POWERFUL whirlwind attack on " + target.getName() + " for " + (getAttackPower() * 2) + " damage!");
 		target.takeDamage(getAttackPower() * 2);
 	}
 
 	@Override
 	public void displayStats() {
 	    super.displayStats();
-	    System.out.println("Class: Warrior");
+	    com.bptn.individual_project.util.MessageLogger.println("Class: Warrior");
 	}
 	
 	

@@ -33,9 +33,9 @@ public class CombatManager {
      * Returns true if the player won, false if the player was defeated.
      */
     public boolean startCombat() {
-        System.out.println("\n========================================");
-        System.out.println("  COMBAT START: " + player.getName() + " vs " + enemy.getName());
-        System.out.println("========================================");
+        com.bptn.individual_project.util.MessageLogger.println("\n========================================");
+        com.bptn.individual_project.util.MessageLogger.println("  COMBAT START: " + player.getName() + " vs " + enemy.getName());
+        com.bptn.individual_project.util.MessageLogger.println("========================================");
 
         while (player.isAlive() && enemy.isAlive()) {
             printStatus();
@@ -44,16 +44,16 @@ public class CombatManager {
             playerTurn();
 
             if (!enemy.isAlive()) {
-                System.out.println("\n" + enemy.getName() + " has been defeated!");
+                com.bptn.individual_project.util.MessageLogger.println("\n" + enemy.getName() + " has been defeated!");
                 return true;
             }
 
             // --- Enemy's Turn ---
-            System.out.println("\n--- " + enemy.getName() + "'s turn ---");
+            com.bptn.individual_project.util.MessageLogger.println("\n--- " + enemy.getName() + "'s turn ---");
             enemyTurn();
 
             if (!player.isAlive()) {
-                System.out.println("\n" + player.getName() + " has been defeated...");
+                com.bptn.individual_project.util.MessageLogger.println("\n" + player.getName() + " has been defeated...");
                 return false;
             }
         }
@@ -66,12 +66,12 @@ public class CombatManager {
      * Special attack is only available once per fight.
      */
     private void playerTurn() {
-        System.out.println("\n--- Your Turn ---");
+        com.bptn.individual_project.util.MessageLogger.println("\n--- Your Turn ---");
 
-        System.out.println("1. Attack");
+        com.bptn.individual_project.util.MessageLogger.println("1. Attack");
 
         if (!playerSpecialUsed) {
-            System.out.println("2. Special Attack (once per fight)");
+            com.bptn.individual_project.util.MessageLogger.println("2. Special Attack (once per fight)");
 
             int choice = InputValidator.getValidatedMenuChoice(scanner, 1, 2);
 
@@ -81,7 +81,7 @@ public class CombatManager {
                 return;
             }
         } else {
-            System.out.println("(Special attack already used this fight)");
+            com.bptn.individual_project.util.MessageLogger.println("(Special attack already used this fight)");
             InputValidator.getValidatedMenuChoice(scanner, 1, 1);
         }
 
@@ -107,10 +107,10 @@ public class CombatManager {
      * Prints each combatant's current HP before the player's turn.
      */
     private void printStatus() {
-        System.out.println("\n----------------------------------------");
-        System.out.printf("  %-20s HP: %d/%d%n", player.getName(), player.getHealth(), player.getMaxHealth());
-        System.out.printf("  %-20s HP: %d/%d%n", enemy.getName(), enemy.getHealth(), enemy.getMaxHealth());
-        System.out.println("----------------------------------------");
+        com.bptn.individual_project.util.MessageLogger.println("\n----------------------------------------");
+        com.bptn.individual_project.util.MessageLogger.printf("  %-20s HP: %d/%d%n", player.getName(), player.getHealth(), player.getMaxHealth());
+        com.bptn.individual_project.util.MessageLogger.printf("  %-20s HP: %d/%d%n", enemy.getName(), enemy.getHealth(), enemy.getMaxHealth());
+        com.bptn.individual_project.util.MessageLogger.println("----------------------------------------");
     }
 
 }

@@ -23,7 +23,7 @@ public class InputValidator {
      */
     public static int getValidatedMenuChoice(Scanner scanner, int min, int max) {
         while (true) {
-            System.out.print("Enter choice (" + min + "-" + max + "): ");
+            com.bptn.individual_project.util.MessageLogger.print("Enter choice (" + min + "-" + max + "): ");
             String input = scanner.nextLine().trim();
 
             try {
@@ -31,10 +31,10 @@ public class InputValidator {
                 if (choice >= min && choice <= max) {
                     return choice;
                 }
-                System.out.println("  Please enter a number between " + min + " and " + max + ".");
+                com.bptn.individual_project.util.MessageLogger.println("  Please enter a number between " + min + " and " + max + ".");
             } catch (NumberFormatException e) {
                 // Input was not a number at all
-                System.out.println("  Invalid input — please enter a number.");
+                com.bptn.individual_project.util.MessageLogger.println("  Invalid input — please enter a number.");
             }
         }
     }
@@ -49,16 +49,16 @@ public class InputValidator {
      */
     public static String getValidatedName(Scanner scanner) {
         while (true) {
-            System.out.print("Enter your character's name: ");
+            com.bptn.individual_project.util.MessageLogger.print("Enter your character's name: ");
             String input = scanner.nextLine().trim();
 
             if (input.length() < 2 || input.length() > 20) {
-                System.out.println("  Name must be between 2 and 20 characters.");
+                com.bptn.individual_project.util.MessageLogger.println("  Name must be between 2 and 20 characters.");
                 continue;
             }
 
             if (!input.matches("[a-zA-Z ]+")) {
-                System.out.println("  Name can only contain letters and spaces.");
+                com.bptn.individual_project.util.MessageLogger.println("  Name can only contain letters and spaces.");
                 continue;
             }
 
@@ -77,7 +77,7 @@ public class InputValidator {
      */
     public static boolean getYesNo(Scanner scanner, String prompt) {
         while (true) {
-            System.out.print(prompt + " (Y/N): ");
+            com.bptn.individual_project.util.MessageLogger.print(prompt + " (Y/N): ");
             String input = scanner.nextLine().trim().toLowerCase();
 
             if (input.equals("y") || input.equals("yes")) {
@@ -85,7 +85,7 @@ public class InputValidator {
             } else if (input.equals("n") || input.equals("no")) {
                 return false;
             } else {
-                System.out.println("  Please enter Y or N.");
+                com.bptn.individual_project.util.MessageLogger.println("  Please enter Y or N.");
             }
         }
     }
@@ -101,13 +101,13 @@ public class InputValidator {
      */
     public static char getValidatedDirection(Scanner scanner) {
         while (true) {
-            System.out.print("Choose a direction to explore (N / E / S / W): ");
+            com.bptn.individual_project.util.MessageLogger.print("Choose a direction to explore (N / E / S / W): ");
             String input = scanner.nextLine().trim().toUpperCase();
 
             if (input.length() == 1 && "NESW".contains(input)) {
                 return input.charAt(0);
             }
-            System.out.println("  Please enter N, E, S, or W.");
+            com.bptn.individual_project.util.MessageLogger.println("  Please enter N, E, S, or W.");
         }
     }
 }
