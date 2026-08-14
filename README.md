@@ -11,3 +11,5 @@ equipment and progressing through increasingly difficult encounters.
 1. Open the project in your IDE.
 2. Navigate to `src/main/java/com/bptn/individual_project/App.java`.
 3. Run the `main` method.
+
+You can also check it out at -> https://abazeydio.github.io/LegendOfOrbis/
